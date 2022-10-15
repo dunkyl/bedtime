@@ -8,6 +8,8 @@ import win32con
 Action: TypeAlias = Callable[[], None]
 
 class Listener():
+    on_sleep: Action
+    on_shutdown: Action
 
     def _callback_filtered(self, _hwnd, msg, wparam, _lparam):
         if msg == win32con.WM_POWERBROADCAST \
@@ -45,8 +47,8 @@ class Listener():
     def __init__(self, *, on_sleep: Action|None=None, on_shutdown: Action|None=None):
         self.on_sleep = on_sleep or (lambda: None)
         self.on_shutdown = on_shutdown or (lambda: None)
-        self.thread = threading.Thread(target=self._win_event_thread, daemon=True)
-        self.thread.start()
+        self._thread = threading.Thread(target=self._win_event_thread, daemon=True)
+        self._thread.start()
 
     def __del__(self):
         win32gui.DestroyWindow(self.hwnd) # type: ignore
