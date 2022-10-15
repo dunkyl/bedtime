@@ -20,6 +20,6 @@ while True:
 ```
 
 TODO:
-    [*] Windows
-    [ ] MacOS
-    [ ] Linux (maybe usually the same as MacOS?)
+* [x] Windows
+* [] MacOS
+* [] Linux (maybe usually the same as MacOS?)
