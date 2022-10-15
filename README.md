@@ -18,3 +18,8 @@ while True:
     # test.log <
     #   i went to sleep
 ```
+
+TODO:
+    [*] Windows
+    [ ] MacOS
+    [ ] Linux (maybe usually the same as MacOS?)
