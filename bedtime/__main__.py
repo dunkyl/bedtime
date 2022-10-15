@@ -6,9 +6,9 @@ def stamp():
     return time.strftime('[%H:%M:%S]', time.localtime())
 
 def log_info(msg):
-    f = open("./test.log", "a")
-    f.write(msg + "\n")
-    f.close()
+    with open("./test.log", "a") as f:
+        f.write(msg + "\n")
+
 
 def log_sleep():
     log_info(F"{stamp()} slept")
