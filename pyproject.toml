@@ -9,6 +9,8 @@ dependencies = [
     'pywin32; sys_platform == "win32"',
     'pyobjc; sys_platform == "darwin"'
 ]
+[project.urls]
+repository = "https://github.com/dunkyl/bedtime"
 
 [build-system]
 requires = ["setuptools", "wheel"]
