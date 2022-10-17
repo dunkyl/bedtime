@@ -1,6 +1,6 @@
 import time
 
-import bedtime
+import __init__ as bedtime
 
 def stamp():
     return time.strftime('[%H:%M:%S]', time.localtime())
