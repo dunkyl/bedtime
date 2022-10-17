@@ -1,2 +1,15 @@
+[project]
+name = "Bedtime"
+version = "0.0.1"
+readme = "README.md"
+requires-python = ">=3.6"
+license = "MIT"
+authors = [{name="dunkyl"}]
+dependencies = [
+    'pywin32; sys_platform == "win32"',
+    'pyobjc; sys_platform == "darwin"'
+]
+
+
 [build-system]
 requires = ["setuptools", "wheel"]

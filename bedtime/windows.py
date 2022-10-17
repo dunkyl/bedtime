@@ -1,15 +1,10 @@
-from typing import Callable, TypeAlias
-import threading
-
 import win32api
 import win32gui
 import win32con
 
-Action: TypeAlias = Callable[[], None]
+from common import _Listener
 
-class Listener():
-    on_sleep: Action
-    on_shutdown: Action
+class Listener(_Listener):
 
     def _callback_filtered(self, _hwnd, msg, wparam, _lparam):
         if msg == win32con.WM_POWERBROADCAST \
@@ -18,7 +13,7 @@ class Listener():
         elif msg == win32con.WM_QUERYENDSESSION:
             self.on_shutdown()
 
-    def _win_event_thread(self):
+    def _event_thread(self):
         self.hwind = self._mk_hwnd()
         events = True
         while events: # poll for new events
@@ -43,12 +38,6 @@ class Listener():
                                         wndclass.hInstance, 
                                         None)
         return hwnd
-
-    def __init__(self, *, on_sleep: Action|None=None, on_shutdown: Action|None=None):
-        self.on_sleep = on_sleep or (lambda: None)
-        self.on_shutdown = on_shutdown or (lambda: None)
-        self._thread = threading.Thread(target=self._win_event_thread, daemon=True)
-        self._thread.start()
 
     def __del__(self):
         win32gui.DestroyWindow(self.hwnd) # type: ignore
