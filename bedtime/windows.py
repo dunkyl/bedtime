@@ -2,7 +2,7 @@ import win32api
 import win32gui
 import win32con
 
-from common import _Listener
+from .common import _Listener
 
 class Listener(_Listener):
 

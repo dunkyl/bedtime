@@ -1,7 +1,7 @@
 import time
 from AppKit import NSObject, NSWorkspace
 
-from common import _Listener
+from .common import _Listener
 
 class MacOsSleepListener(NSObject):
 
