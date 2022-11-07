@@ -5,10 +5,13 @@ from .common import _Listener
 
 class MacOsSleepListener(NSObject):
 
-    def __init__(self, callback):
-        self.callback = callback
+    def __init__(self):
+        # self.callback = callback
         NSWorkspace.sharedWorkspace().notificationCenter().addObserver_selector_name_object_(
             self, self.sleepNotification_, "NSWorkspaceWillSleepNotification", None)
+
+    def callback(self):
+        print("sleeping")
 
     def sleepNotification_(self, notification):
         print(notification)
@@ -17,6 +20,8 @@ class MacOsSleepListener(NSObject):
 class Listener(_Listener):
 
     def _event_thread(self):
-        self._nsobj = MacOsSleepListener(self.on_sleep)
+        cb = self.on_sleep
+        l = MacOsSleepListener.new()
+        self._nsobj = l
         while True:
             time.sleep(1)
