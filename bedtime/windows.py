@@ -7,11 +7,14 @@ from .common import _Listener
 class Listener(_Listener):
 
     def _callback_filtered(self, _hwnd, msg, wparam, _lparam):
-        if msg == win32con.WM_POWERBROADCAST \
-            and wparam  == win32con.PBT_APMSUSPEND:
-            self.on_sleep() 
+        if msg == win32con.WM_POWERBROADCAST:
+            if wparam == win32con.PBT_APMSUSPEND:
+                self.on_sleep()
+            elif wparam == win32con.PBT_APMRESUMESUSPEND:
+                self.on_wake()
         elif msg == win32con.WM_QUERYENDSESSION:
             self.on_shutdown()
+        return 0
 
     def _event_thread(self):
         self.hwind = self._mk_hwnd()

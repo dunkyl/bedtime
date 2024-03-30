@@ -22,4 +22,4 @@ while True:
 TODO:
 * [x] Windows
 * [ ] MacOS
-* [ ] Linux (maybe usually the same as MacOS?)
+* [ ] Linux
